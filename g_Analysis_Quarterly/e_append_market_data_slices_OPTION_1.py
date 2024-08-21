@@ -1,0 +1,60 @@
+import pandas as pd
+
+from d_data_enrichment import df
+
+# Tenure.
+tenure = df[[
+    "qtr", "outlet", "tenure", "data_partner", "product", "product_class", "product_group", "volume", "value", "scenario"
+    ]]
+tenure = tenure.rename(
+    columns={
+        "tenure": "market"
+    }
+)
+tenure["market"] = "Tenure | " + tenure["market"]
+
+# Segment.
+segment = df[[
+    "qtr", "outlet", "segment", "data_partner", "product", "product_class", "product_group", "volume", "value", "scenario"
+    ]]
+segment = segment.rename(
+    columns={
+        "segment": "market"
+    }
+)
+segment["market"] = "Segment | " + segment["market"]
+
+# Region.
+region = df[[
+    "qtr", "outlet", "region", "data_partner", "product", "product_class", "product_group", "volume", "value", "scenario"
+    ]]
+region = region.rename(
+    columns={
+        "region": "market"
+    }
+)
+region["market"] = "Region | " + region["market"]
+
+# Country.
+country = df[[
+    "qtr", "outlet", "country", "data_partner", "product", "product_class", "product_group", "volume", "value", "scenario"
+    ]]
+country = country.rename(
+    columns={
+        "country": "market"
+    }
+)
+country["market"] = "Country | " + country["market"]
+
+# Quality.
+quality = df[[
+    "qtr", "outlet", "quality", "data_partner", "product", "product_class", "product_group", "volume", "value", "scenario"
+    ]]
+quality = quality.rename(
+    columns={
+        "quality": "market"
+    }
+)
+quality["market"] = "Quality | " + quality["market"]
+
+df = pd.concat([tenure, segment, region, country, quality], axis=0)
